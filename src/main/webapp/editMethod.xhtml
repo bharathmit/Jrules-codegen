@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<title>Code Generator</title>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<div class="body current" role="tabpanel" id="Add-area">
+			<div class="row panel-body">
+				<div class="col-md-12">
+					<p:outputPanel id="addarea">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-lg-6">
+								<div class="form-group">
+									<h:panelGrid columns="1" style="margin:10px 0">
+										<p:outputLabel value="Search Method:" style="font-weight:bold" />
+										<p:spacer width="10" />
+										<h:inputText id="colum" style="width:100%"
+											value="#{methodBean.reqObject.methodName}">
+										</h:inputText>
+										<p:spacer width="10" />
+										<p:commandButton
+											class="btn btn-submit btn-xs cus-btn btn-info" value="Search"
+											process="@parent" 
+											update="panel"
+											action="#{methodBean.findMethod}"/>
+									</h:panelGrid>
+								</div>
+							</div>
+						</div>
+						<table style="width: 100%" border="1">
+							<tr>
+								<td>
+									<div class="row">
+										<div class="col-md-6 col-sm-6 col-lg-6">
+											<div class="form-group">
+												<h:panelGrid id="panel" columns="2" style="margin:10px 0">
+													<p:outputLabel value="Edit Method:"
+														style="font-weight:bold" />
+													<p:spacer width="10" />
+													<h:inputTextarea rows="3" cols="50"
+														value="#{methodBean.reqObject.details}">
+													</h:inputTextarea>
+												</h:panelGrid>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</p:outputPanel>
+					<div class="form-group">
+						<div class="form-actions">
+							<h:commandButton value=" Save"
+								class="btn btn-submit btn-xs cus-btn btn-info"
+								action="#{methodBean.saveMethod}"  update="growl" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>
