@@ -12,6 +12,8 @@ import javax.faces.component.UISelectBoolean;
 import javax.faces.component.html.HtmlDataTable;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -53,8 +55,8 @@ public class MethodBean {
 	@Getter @Setter
 	private HtmlDataTable dataTable;
 	
-	/*@Getter @Setter
-	private UISelectBoolean checked = null;*/
+	@Getter @Setter
+	private Boolean renderCheck = null;
 	
 	public String saveMethod(){
 		methodService.saveMethodDetails(reqObject);
@@ -116,6 +118,7 @@ public class MethodBean {
 				tempList.removeAll(tempList);
 				
 			}
+			renderCheck=false;
 			
 			
 			
@@ -125,18 +128,27 @@ public class MethodBean {
 		public String deleteMethodName(){
 			
 			if (!filteredMethodNamesList.isEmpty()) {
-				for (MethodDetailsDto tempListObject : tempList) {
-					
-					for(MethodDetailsDto filterListObject: filteredMethodNamesList){
-						if(tempListObject.getId()==filterListObject.getId()){
-							filteredMethodNamesList.remove(filterListObject);
-							break;
-						}
-					}
-					
+				
+				filteredMethodNamesList.removeAll(tempList);
+				tempList.removeAll(tempList);
+				renderCheck=false;
+				if(filteredMethodNamesList.isEmpty()){
+					renderCheck=null;
 				}
 			}
 			
 		return "Method deleted";
 	}
+		public void onRowSelect(SelectEvent event) {
+	        reqObject=(MethodDetailsDto) event.getObject();
+	        renderCheck=true;
+	    }
+	 
+	    public void onRowUnselect(UnselectEvent event) {
+	        /*FacesMessage msg = new FacesMessage("Car Unselected", ((Car) event.getObject()).getId());
+	        FacesContext.getCurrentInstance().addMessage(null, msg);*/
+	    	reqObject=new MethodDetailsDto();
+	    	renderCheck=false;
+	    }
+
 }

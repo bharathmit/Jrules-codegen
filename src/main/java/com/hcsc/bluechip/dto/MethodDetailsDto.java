@@ -25,5 +25,5 @@ public class MethodDetailsDto implements Serializable {
 	@Getter	@Setter	
 	private Boolean selected;
 	
-
+	
 }
