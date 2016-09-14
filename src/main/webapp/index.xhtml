@@ -5,239 +5,122 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Code Generator</title>
-	<script src="popUpScripts.js"></script> 
+	<script src="popUpScripts.js"></script>
 </h:head>
 <h:body>
 	<h:form id="form">
-		<div class="body current" role="tabpanel" id="Add-area">
-			<div class="row panel-body">
-				<div class="col-md-12">
-					<p:outputPanel id="addarea">
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-lg-6">
-								<div class="form-group">
-
-									<h:panelGrid columns="9" style="margin:10px 0">
-										<p:outputLabel value="Rule Name:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText style="width:100%"
-											value="#{codeGenerator.ruleID}">
-										</h:inputText>
-										<p:spacer width="10" />
-										<p:outputLabel value="Author Name:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText style="width:100%"
-											value="#{codeGenerator.author}">
-										</h:inputText>
-
-									</h:panelGrid>
-
-								</div>
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-lg-6">
-								<div class="form-group">
-
-									<h:panelGrid columns="9" style="margin:10px 0">
-										<p:outputLabel value="Rule File:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText style="width:100%"
-											value="#{codeGenerator.ruleFile}">
-										</h:inputText>
-										<p:spacer width="10" />
-										<p:outputLabel value="Rule Package:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText style="width:100%"
-											value="#{codeGenerator.rulePackage}">
-										</h:inputText>
-
-									</h:panelGrid>
-
-								</div>
-
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-lg-6">
-								<div class="form-group">
-
-									<h:panelGrid columns="2" style="margin:10px 0">
-										<p:outputLabel value="Rule Description:"
-											style="font-weight:bold" />
-										<p:spacer width="10" />
-										<p:inputTextarea rows="3" cols="50"
-											value="#{codeGenerator.description}">
-										</p:inputTextarea>
-									</h:panelGrid>
-
-								</div>
-
-							</div>
-						</div>
-						<!-- middle area Paddy -->
-						
-							<div class="row">
-								<!-- <div class="col-md-6 col-sm-6 col-lg-6"> -->
-									<div class="form-group">
-										<h:panelGrid columns="9" style="margin:10px 0" id="search">
-											<p:outputLabel value="Find Method:"
-												style="font-weight:bold" />
-											<p:spacer width="10" />
-											
-											<!-- <p:spacer width="10" /> -->
-											<p:commandButton
-												class="btn btn-submit btn-xs cus-btn btn-info"
-												value="Search" process="@parent" 
-												
-												onclick="PF('dlg2').show();" />
-												
-											<!-- <p:spacer width="10" /> -->
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<h:inputTextarea rows="9" cols="50"
-															value="Click on a method selected to view its details" rendered="#{methodBean.renderCheck eq 'false'}">
-											</h:inputTextarea>
-											<h:inputTextarea rows="9" cols="50"
-															value="#{methodBean.reqObject.details}" rendered="#{methodBean.renderCheck eq 'true'}">
-											</h:inputTextarea>
-											
-										</h:panelGrid>
-									</div>
-								<!-- </div> -->
-							</div>
-							
-										<div class="row">
-											<div class="col-md-6 col-sm-6 col-lg-6">
-												<div class="form-group">
-													<h:panelGrid id="panel2" columns="2" style="margin:10px 0">
-														<p:outputLabel value="Method List:" 
-															style="font-weight:bold" />
-														<p:spacer width="10" />
-							<p:dataTable id="methodListTable"
-								value="#{methodBean.filteredMethodNamesList}" var="fMethod"
-								selection="#{methodBean.tempList}" 
-								rowKey="#{fMethod}" rowIndexVar="methodIdx" styleClass="marginbottom">
-								<!-- <p:column headerText="Select" selectionMode="single"
-									styleClass="associate" /> -->
-								<p:ajax event="rowSelect" listener="#{methodBean.onRowSelect}" update=":form:search" />
-        						<p:ajax event="rowUnselect" listener="#{methodBean.onRowUnselect}" update=":form:search" />
-								<p:column headerText="S.No." styleClass="text-left-imp">
-									<h:outputText value="#{methodIdx+1}" />
-								</p:column>
-								<p:column headerText="Name" sortBy="#{fMethod.methodName}"
-									styleClass="text-left-imp">
-									<h:outputText value="#{fMethod.methodName}" />
-								</p:column>
-								<p:column headerText="Delete" selectionMode="multiple"
-									styleClass="associate" /> 
-									<!-- <p:column headerText="Delete" >
-										<h:selectBooleanCheckbox value="#{fMethod.selected}" />
-										
-									</p:column> -->
-							</p:dataTable>
-							</h:panelGrid>
-							<h:panelGrid id="panelDltBtn" columns="2" style="margin:10px 0">
-							<h:commandButton value="Delete"
-								class="btn btn-submit btn-xs cus-btn btn-info"
-								action="#{methodBean.deleteMethodName}" update="search" />
-								
-							</h:panelGrid>
-												</div>
-											</div>
-										</div>
-									
-						
-						<!-- middle area end Paddy -->
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-lg-6">
-								<div class="form-group">
-
-									<h:panelGrid columns="9" style="margin:10px 0">
-										<p:outputLabel value="Colum:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText id="column" style="width:100%"
-											value="#{codeGenerator.column}">
-										</h:inputText>
-										<p:spacer width="10" />
-										<p:outputLabel value="Row:" style="font-weight:bold" />
-										<p:spacer width="10" />
-										<h:inputText id="rows" style="width:100%"
-											value="#{codeGenerator.row}">
-										</h:inputText>
-										<p:spacer width="10" />
-										<p:commandButton update="cars"
-											actionListener="#{codeGenerator.createDynamicColumns}"
-											class="btn btn-submit btn-xs cus-btn btn-info" value="Update"
-											process="@parent" />
-									</h:panelGrid>
-
-								</div>
-
-							</div>
-						</div>
-
-
-
-
-						<div class="row">
-							<div class="col-md-6 col-sm-6 col-lg-6">
-								<div class="form-group">
-
-									<p:outputLabel class="control-label" for="cars"
-										style="font-weight:bold" value="CSV File Template:" />
-									<div>
-										<p:dataTable id="cars" var="car" value="#{codeGenerator.cars}"
-											widgetVar="carsTable">
-											<p:columns value="#{codeGenerator.columns}" var="column"
-												columnIndexVar="colIndex">
-												<!-- <f:facet name="header">
-													<h:outputText value="#{column.header}" />
-												</f:facet> -->
-												<h:inputText style="width:100%"
-													value="#{car[column.property]}" />
-											</p:columns>
-										</p:dataTable>
-
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</p:outputPanel>
-					<div class="form-group">
-						<div class="form-actions">
-							
-								&nbsp;
-								<h:panelGrid columns="2" style="margin:10px 0">
-								<h:commandButton value=" Download"
-															class="btn btn-submit btn-xs cus-btn btn-info"
-															action="#{codeGenerator.fileDowload}"
-															update="growl" />
-								</h:panelGrid>
-
-						</div>
-					</div>
-
-				</div>
+		<p:outputPanel id="addarea">
+			<h:panelGrid columns="9" style="margin:10px 0">
+				<p:outputLabel value="Rule Name:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText style="width:100%" value="#{codeGenerator.ruleID}">
+				</h:inputText>
+				<p:spacer width="10" />
+				<p:outputLabel value="Author Name:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText style="width:100%" value="#{codeGenerator.author}">
+				</h:inputText>
+			</h:panelGrid>
+			<h:panelGrid columns="9" style="margin:10px 0">
+				<p:outputLabel value="Rule File:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText style="width:100%" value="#{codeGenerator.ruleFile}">
+				</h:inputText>
+				<p:spacer width="10" />
+				<p:outputLabel value="Rule Package:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText style="width:100%" value="#{codeGenerator.rulePackage}">
+				</h:inputText>
+			</h:panelGrid>
+			<h:panelGrid columns="2" style="margin:10px 0">
+				<p:outputLabel value="Rule Description:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<p:inputTextarea rows="3" cols="50"
+					value="#{codeGenerator.description}">
+				</p:inputTextarea>
+			</h:panelGrid>
+			<h:panelGrid columns="9" style="margin:10px 0" id="search">
+				<p:outputLabel value="Find Method:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<p:commandButton value="Search" process="@parent"
+					onclick="PF('dlg2').show();" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h:inputTextarea rows="9" cols="50"
+					value="Click on a method selected to view its details"
+					rendered="#{methodBean.renderCheck eq 'false'}">
+				</h:inputTextarea>
+				<h:inputTextarea rows="9" cols="50"
+					value="#{methodBean.reqObject.details}"
+					rendered="#{methodBean.renderCheck eq 'true'}">
+				</h:inputTextarea>
+			</h:panelGrid>
+			<h:panelGrid id="panel2" columns="2" style="margin:10px 0">
+				<p:outputLabel value="Method List:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<p:dataTable id="methodListTable"
+					value="#{methodBean.filteredMethodNamesList}" var="fMethod"
+					selection="#{methodBean.tempList}" rowKey="#{fMethod}"
+					rowIndexVar="methodIdx" styleClass="marginbottom">
+					<p:ajax event="rowSelect" listener="#{methodBean.onRowSelect}"
+						update=":form:search" />
+					<p:ajax event="rowUnselect" listener="#{methodBean.onRowUnselect}"
+						update=":form:search" />
+					<p:column headerText="S.No." styleClass="text-left-imp">
+						<h:outputText value="#{methodIdx+1}" />
+					</p:column>
+					<p:column headerText="Name" sortBy="#{fMethod.methodName}"
+						styleClass="text-left-imp">
+						<h:outputText value="#{fMethod.methodName}" />
+					</p:column>
+					<p:column headerText="Delete" selectionMode="multiple"
+						styleClass="associate" />
+				</p:dataTable>
+			</h:panelGrid>
+			<h:panelGrid id="panelDltBtn" columns="2" style="margin:10px 0">
+				<h:commandButton value="Delete"
+					action="#{methodBean.deleteMethodName}" update="search" />
+			</h:panelGrid>
+			<h:panelGrid columns="9" style="margin:10px 0">
+				<p:outputLabel value="Colum:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText id="column" style="width:100%"
+					value="#{codeGenerator.column}">
+				</h:inputText>
+				<p:spacer width="10" />
+				<p:outputLabel value="Row:" style="font-weight:bold" />
+				<p:spacer width="10" />
+				<h:inputText id="rows" style="width:100%"
+					value="#{codeGenerator.row}">
+				</h:inputText>
+				<p:spacer width="10" />
+				<p:commandButton update="cars"
+					actionListener="#{codeGenerator.createDynamicColumns}"
+					value="Update" process="@parent" />
+			</h:panelGrid>
+			<p:outputLabel for="cars" style="font-weight:bold"
+				value="CSV File Template:" />
+			<div>
+				<p:dataTable id="cars" var="car" value="#{codeGenerator.cars}"
+					widgetVar="carsTable">
+					<p:columns value="#{codeGenerator.columns}" var="column"
+						columnIndexVar="colIndex">
+						<h:inputText style="width:100%" value="#{car[column.property]}" />
+					</p:columns>
+				</p:dataTable>
 			</div>
-		</div>
-
+			&nbsp;
+			<h:panelGrid columns="2" style="margin:10px 0">
+				<h:commandButton value=" Download"
+					action="#{codeGenerator.fileDowload}" update="growl" />
+			</h:panelGrid>
+		</p:outputPanel>
 	</h:form>
-<p:dialog header="Select Method" widgetVar="dlg2" modal="true" height="500" width="1000">
-	<ui:include src="/selectMethod.xhtml" />
-</p:dialog>
-    
-
-
-
+	<p:dialog header="Select Method" widgetVar="dlg2" modal="true"
+		height="500" width="1000">
+		<ui:include src="/selectMethod.xhtml" />
+	</p:dialog>
 </h:body>
 </html>
