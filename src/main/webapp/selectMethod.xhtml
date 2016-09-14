@@ -48,7 +48,7 @@
 								currentPageReportTemplate="{currentPage} / {totalPages}"
 								rowKey="#{method}" rows="20" paginator="true"
 								paginatorPosition="bottom" rowIndexVar="methodIdx"
-								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  No of rows: {RowsPerPageDropdown}"
 								rowsPerPageTemplate="20,50,100" lazy="false"
 								styleClass="marginbottom">
 
@@ -64,8 +64,9 @@
 									<h:selectBooleanCheckbox id="checked" value="#{methodBean.reqObject.selected}"  ></h:selectBooleanCheckbox>
 								</p:column> -->
 							</p:dataTable>
-
-
+							</h:panelGrid>
+							<h:panelGrid id="panelDataTableAddBtn" columns="2" style="margin:10px 0">
+							
 
 						
 					
