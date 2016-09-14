@@ -106,7 +106,10 @@
 					widgetVar="carsTable">
 					<p:columns value="#{codeGenerator.columns}" var="column"
 						columnIndexVar="colIndex">
-						<h:inputText style="width:100%" value="#{car[column.property]}" />
+						<f:facet name="header">
+							<h:outputText value="#{column.header}" />
+						</f:facet>
+						<h:inputText  style="width:100%" value="#{car[column.property]}" />
 					</p:columns>
 				</p:dataTable>
 			</div>

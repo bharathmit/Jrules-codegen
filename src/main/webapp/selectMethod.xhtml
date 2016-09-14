@@ -21,7 +21,7 @@
 				<p:commandButton value="Search" process="@parent"
 					update="panelDataTable" action="#{methodBean.wildCardSearchMethod}" />
 			</h:panelGrid>
-			<div>
+			<div> 
 				<h:panelGrid id="panelDataTable" columns="2" style="margin:10px 0">
 					<p:dataTable id="searchResultTable"
 						value="#{methodBean.methodNamesList}" var="method"
