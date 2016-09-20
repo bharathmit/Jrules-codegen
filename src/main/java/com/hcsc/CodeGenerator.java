@@ -15,11 +15,15 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+
+import com.hcsc.bluechip.bean.MethodBean;
+import com.hcsc.bluechip.dto.MethodDetailsDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +33,12 @@ import lombok.extern.log4j.Log4j;
 @SessionScoped
 @Log4j
 public class CodeGenerator {
+	
+	
+	/*@ManagedProperty(value="#{methodBean}")
+	@Getter @Setter
+	MethodBean methodBean;*/
+	
 	public static int csvFileCounter = 0;
 	public static int junitFileCounter = 0;
 	public static int archiveFileCounter = 0;
@@ -59,14 +69,9 @@ public class CodeGenerator {
  @Getter @Setter
  private List<ListModel> cars;
  
- public void createDynamicColumns() {
-
-  columns = new ArrayList<ColumnModel>();
-  for (int i = 1; i <= column; i++) {
-   columns.add(new ColumnModel("column".toUpperCase() + " " + i,
-     "column" + i));
-  }
-
+ 
+ 
+ public void createDynamicRows() {
   cars = new ArrayList<ListModel>();
   for (int i = 1; i <= row; i++) {
    cars.add(new ListModel());
@@ -74,7 +79,38 @@ public class CodeGenerator {
 
  }
  
- public static void main(String arg[]){
+ public void createDynamicColumns(List<MethodDetailsDto> filteredMethodNamesList) {
+
+	  List<String> columnHeaderList=new ArrayList<String>(); 
+	  columnHeaderList=retrieveColHdrList(filteredMethodNamesList);
+	  columnHeaderList.add("empId");
+	  columnHeaderList.add("empName");
+	  columnHeaderList.add("empPhn");
+	  columnHeaderList.add("empEmail");
+	  
+	  column=columnHeaderList.size();
+	  
+	  columns = new ArrayList<ColumnModel>();
+	  for (int i = 1; i <= column; i++) {
+	   columns.add(new ColumnModel(columnHeaderList.get(i-1),
+	     "column" + i));
+	  }
+
+	  /*cars = new ArrayList<ListModel>();
+	  int row=1; //need to made dynamic
+	  for (int i = 1; i <= row; i++) {
+	   cars.add(new ListModel());
+	  }*/
+
+	 }
+ 
+ private List<String> retrieveColHdrList(List<MethodDetailsDto> filteredMethodNamesList) {
+	// TODO Auto-generated method stub
+	 
+	return null;
+}
+
+public static void main(String arg[]){
 	 CodeGenerator testObj=new CodeGenerator();
 	 testObj.ruleID="MC123";
 	 testObj.author="i346645";

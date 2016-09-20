@@ -19,6 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
+import com.hcsc.CodeGenerator;
 import com.hcsc.bluechip.dto.MethodDetailsDto;
 import com.hcsc.bluechip.entity.MethodDetails;
 import com.hcsc.bluechip.service.MethodService;
@@ -36,6 +37,10 @@ public class MethodBean {
 	@ManagedProperty(value="#{methodService}")
 	@Getter @Setter
 	MethodService methodService;
+	
+	@ManagedProperty(value="#{codeGenerator}")
+	@Getter @Setter
+	CodeGenerator codeGenerator;
 	
 	@Getter @Setter
 	MethodDetailsDto reqObject=new MethodDetailsDto();
@@ -120,7 +125,7 @@ public class MethodBean {
 			}
 			renderCheck=false;
 			
-			
+			codeGenerator.createDynamicColumns(filteredMethodNamesList);
 			
 		return "Method found";
 	}
@@ -136,7 +141,7 @@ public class MethodBean {
 					renderCheck=null;
 				}
 			}
-			
+			codeGenerator.createDynamicColumns(filteredMethodNamesList);
 		return "Method deleted";
 	}
 		public void onRowSelect(SelectEvent event) {
