@@ -62,10 +62,17 @@ public class MethodBean {
 	@Getter @Setter
 	private Boolean renderCheck = null;
 	
+	@Getter @Setter
+	private String addStatus = "";
+	
+	@Getter @Setter
+	private String editStatus = "";
+	
 	public String saveMethod(){
 		methodService.saveMethodDetails(reqObject);
 		reqObject=new MethodDetailsDto();
-		return "Save Completed";
+		addStatus ="Save successful";
+		return addStatus;
 	}
 	
 	public String findMethod(){
@@ -73,8 +80,12 @@ public class MethodBean {
 		List<MethodDetailsDto> list=methodService.getMethodName(reqObject.getMethodName());		
 		if(!CollectionUtils.isEmpty(list)){
 			reqObject=list.get(0);
+			editStatus= "Method Found";
+		}else{
+			editStatus= "Please try a valid method name";
 		}
-		return "Method found";
+		
+		return editStatus;
 	}
 	
 	public String wildCardSearchMethod(){

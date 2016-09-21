@@ -92,11 +92,6 @@ public class CodeGenerator {
 
 		List<String> columnHeaderList = new ArrayList<String>();
 		columnHeaderList = retrieveColHdrList(filteredMethodNamesList);
-		columnHeaderList.add("empId");
-		columnHeaderList.add("empName");
-		columnHeaderList.add("empPhn");
-		columnHeaderList.add("empEmail");
-
 		column = columnHeaderList.size();
 
 		columns = new ArrayList<ColumnModel>();
@@ -105,11 +100,7 @@ public class CodeGenerator {
 					+ i));
 		}
 
-		/*
-		 * cars = new ArrayList<ListModel>(); int row=1; //need to made dynamic
-		 * for (int i = 1; i <= row; i++) { cars.add(new ListModel()); }
-		 */
-
+		
 	}
 
 	private List<String> retrieveColHdrList(
@@ -372,6 +363,51 @@ public class CodeGenerator {
 		@Getter
 		@Setter
 		private String column10;
+		@Getter
+		@Setter
+		private String column11;
+		@Getter
+		@Setter
+		private String column12;
+		@Getter
+		@Setter
+		private String column13;
+		@Getter
+		@Setter
+		private String column14;
+		@Getter
+		@Setter
+		private String column15;
+		@Getter
+		@Setter
+		private String column16;
+		@Getter
+		@Setter
+		private String column17;
+		@Getter
+		@Setter
+		private String column18;
+		@Getter
+		@Setter
+		private String column19;
+		@Getter
+		@Setter
+		private String column20;
+		@Getter
+		@Setter
+		private String column21;
+		@Getter
+		@Setter
+		private String column22;
+		@Getter
+		@Setter
+		private String column23;
+		@Getter
+		@Setter
+		private String column24;
+		@Getter
+		@Setter
+		private String column25;
 
 		public String getDeatil() {
 			StringBuilder sb = new StringBuilder();
@@ -385,8 +421,6 @@ public class CodeGenerator {
 				sb.append("," + column4);
 			if (!StringUtils.isEmpty(column5))
 				sb.append("," + column5);
-			if (!StringUtils.isEmpty(column5))
-				sb.append("," + column5);
 			if (!StringUtils.isEmpty(column6))
 				sb.append("," + column6);
 			if (!StringUtils.isEmpty(column7))
@@ -397,6 +431,37 @@ public class CodeGenerator {
 				sb.append("," + column9);
 			if (!StringUtils.isEmpty(column10))
 				sb.append("," + column10);
+			if (!StringUtils.isEmpty(column11))
+				sb.append(column11);
+			if (!StringUtils.isEmpty(column12))
+				sb.append("," + column12);
+			if (!StringUtils.isEmpty(column13))
+				sb.append("," + column13);
+			if (!StringUtils.isEmpty(column14))
+				sb.append("," + column14);
+			if (!StringUtils.isEmpty(column15))
+				sb.append("," + column15);
+			if (!StringUtils.isEmpty(column16))
+				sb.append("," + column16);
+			if (!StringUtils.isEmpty(column17))
+				sb.append("," + column17);
+			if (!StringUtils.isEmpty(column18))
+				sb.append("," + column18);
+			if (!StringUtils.isEmpty(column19))
+				sb.append("," + column19);
+			if (!StringUtils.isEmpty(column20))
+				sb.append("," + column20);
+			if (!StringUtils.isEmpty(column21))
+				sb.append(column21);
+			if (!StringUtils.isEmpty(column22))
+				sb.append("," + column22);
+			if (!StringUtils.isEmpty(column23))
+				sb.append("," + column23);
+			if (!StringUtils.isEmpty(column24))
+				sb.append("," + column24);
+			if (!StringUtils.isEmpty(column25))
+				sb.append("," + column25);
+			
 			return sb.toString();
 		}
 

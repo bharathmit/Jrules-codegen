@@ -30,6 +30,12 @@
 		</p:outputPanel>
 		<h:commandButton value="Save" action="#{methodBean.saveMethod}"
 			update="growl" />
+		
 	</h:form> 
+	<h:panelGrid columns="9" style="margin:10px 0">
+	<h:outputText style="font-weight:bold" value="#{methodBean.addStatus}">
+				</h:outputText>
+	</h:panelGrid>
+				
 </h:body>
 </html>

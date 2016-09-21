@@ -22,6 +22,8 @@
 				<p:commandButton value="Search" process="@parent" update="panel"
 					action="#{methodBean.findMethod}" />
 			</h:panelGrid>
+			<h:outputText style="font-weight:bold" value="#{methodBean.editStatus}">
+			</h:outputText>
 			<table style="width: 100%" border="1">
 				<tr>
 					<td><h:panelGrid id="panel" columns="2" style="margin:10px 0">
