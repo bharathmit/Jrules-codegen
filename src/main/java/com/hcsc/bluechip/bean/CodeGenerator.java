@@ -53,26 +53,6 @@ public class CodeGenerator {
 
 	@Getter
 	@Setter
-	private String ruleID;
-
-	@Getter
-	@Setter
-	private String author;
-
-	@Getter
-	@Setter
-	private String ruleFile;
-
-	@Getter
-	@Setter
-	private String description;
-
-	@Getter
-	@Setter
-	private String rulePackage;
-
-	@Getter
-	@Setter
 	List<ColumnModel> columns;
 
 	@Getter
@@ -132,183 +112,6 @@ public class CodeGenerator {
 			e.printStackTrace();
 		}
 		return returnList;
-	}
-
-	public static void main(String arg[]) {
-		CodeGenerator testObj = new CodeGenerator();
-		testObj.ruleID = "MC123";
-		testObj.author = "i346645";
-		testObj.ruleFile = "Elig Amt Must be Entered when Interim Amt";
-		testObj.description = "This method tests the rule MC186 and Populate Error Message";
-		testObj.rulePackage = "ManualCalculation";
-
-		ListModel obj = new ListModel();
-		obj.column1 = "manualCalcType";
-		obj.column2 = "majMedInEligAmt";
-		obj.column3 = "majMedInterim";
-		obj.column4 = "expectedErrorCode";
-
-		testObj.cars = new ArrayList<ListModel>();
-		testObj.cars.add(obj);
-
-		testObj.fileGenerator();
-	}
-
-	public void fileGenerator() {
-		csvFile();
-		junitFile();
-	}
-
-	public void fileDowload() {
-		String csvFileName = csvFile();
-		String junitFileName = junitFile();
-		String zipFile = "C:/Apps/archive" + (archiveFileCounter++) + ".zip";
-		String[] srcFiles = { csvFileName, junitFileName };
-		try {
-			byte[] buffer = new byte[1024];
-			FileOutputStream fos = new FileOutputStream(zipFile);
-			ZipOutputStream zos = new ZipOutputStream(fos);
-			for (int i = 0; i < srcFiles.length; i++) {
-				File srcFile = new File(srcFiles[i]);
-				FileInputStream fis = new FileInputStream(srcFile);
-				zos.putNextEntry(new ZipEntry(srcFile.getName()));
-				int length;
-				while ((length = fis.read(buffer)) > 0) {
-					zos.write(buffer, 0, length);
-				}
-				zos.closeEntry();
-				fis.close();
-			}
-			zos.close();
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletResponse response = (HttpServletResponse) context
-					.getExternalContext().getResponse();
-			response.setContentType("application/zip");
-			response.addHeader("Content-Disposition", "attachment; filename=\""
-					+ zipFile + "\"");
-			byte[] buf = new byte[1024];
-			File file = new File(zipFile);
-			long length = file.length();
-			BufferedInputStream in = new BufferedInputStream(
-					new FileInputStream(file));
-			OutputStream out = response.getOutputStream();
-			response.setContentLength((int) length);
-			while ((in != null) && ((length = in.read(buf)) != -1)) {
-				out.write(buf, 0, (int) length);
-			}
-			in.close();
-			out.flush();
-			out.close();
-			context.responseComplete();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
-
-	public String csvFile() {
-		String fileName = "";
-		try {
-			fileName = "C:/Apps/" + ruleID + (csvFileCounter++) + ".csv";
-			FileWriter fileWriter = new FileWriter(fileName);
-
-			for (int i = 0; i < cars.size(); i++) {
-				fileWriter.append(cars.get(i).getDeatil());
-				fileWriter.append("\n");
-			}
-			fileWriter.flush();
-			fileWriter.close();
-
-		} catch (Exception e) {
-			log.error("CSV File Generator Failed !!", e);
-		}
-		return fileName;
-	}
-
-	public String junitFile() {
-		String fileName = "";
-		try {
-			fileName = "C:/Apps/" + ruleID + (junitFileCounter++) + ".txt";
-
-			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-
-			ArrayList<String> aList = new ArrayList(Arrays.asList(cars.get(0)
-					.getDeatil().split(",")));
-
-			System.out.println(aList.size());
-			System.out.println(aList.toString());
-
-			writer.write("/**");
-			writer.newLine();
-			writer.write("* RuleID: " + ruleID);
-			writer.newLine();
-			writer.write("*");
-			writer.newLine();
-			writer.write("* @author: " + author);
-			writer.newLine();
-			writer.write("*");
-			writer.newLine();
-			writer.write("* {@link " + ruleFile + ".brl}");
-			writer.newLine();
-			writer.write("*");
-			writer.newLine();
-			writer.write("* " + description);
-			writer.newLine();
-			writer.write("*/");
-			writer.newLine();
-
-			writer.write("@Test");
-			writer.newLine();
-			writer.write("@FileParameters(value =\"classpath:testData/"
-					+ rulePackage + "/" + ruleID
-					+ " .csv\", mapper = CsvWithHeaderMapper.class)");
-			writer.newLine();
-			writer.write("@TestDocumentation(requirement = \"" + ruleID
-					+ "\", description = \"" + description
-					+ "\", reference = \"" + aList.size()
-					+ "\", expectations = \"" + description + "\")");
-			writer.newLine();
-			writer.write("public void " + ruleID + "( ");
-
-			for (int i = 0; i < aList.size(); i++) {
-				if (i < aList.size() - 1) {
-					writer.write("String " + aList.get(i) + ", ");
-				} else {
-					writer.write("String " + aList.get(i));
-				}
-			}
-
-			writer.write(") { ");
-			writer.newLine();
-			writer.newLine();
-			writer.write("System.out.println(\" INPUT_VALUES FOR  " + ruleID
-					+ " ===========================================\"); ");
-			writer.newLine();
-			writer.newLine();
-
-			for (int i = 0; i < aList.size(); i++) {
-				writer.write("System.out.println(\"" + aList.get(i) + " : \" +"
-						+ aList.get(i) + ");");
-				writer.newLine();
-			}
-
-			writer.newLine();
-			writer.write("System.out.println(\" ===================================================================\"); ");
-			writer.newLine();
-			writer.newLine();
-
-			writer.write("InsuranceClaim insuranceClaim = InsuranceClaimBuilderMock.builder().build();");
-			writer.newLine();
-			writer.newLine();
-
-			writer.write("}");
-			writer.newLine();
-
-			writer.close();
-
-		} catch (Exception e) {
-			log.error("Junit File Generator Failed !!", e);
-		}
-		return fileName;
 	}
 
 	static public class ColumnModel implements Serializable {
@@ -409,7 +212,8 @@ public class CodeGenerator {
 		@Setter
 		private String column25;
 
-		public String getDeatil() {
+		public String getDetail() {
+			
 			StringBuilder sb = new StringBuilder();
 			if (!StringUtils.isEmpty(column1))
 				sb.append(column1);
@@ -432,7 +236,7 @@ public class CodeGenerator {
 			if (!StringUtils.isEmpty(column10))
 				sb.append("," + column10);
 			if (!StringUtils.isEmpty(column11))
-				sb.append(column11);
+				sb.append("," + column11);
 			if (!StringUtils.isEmpty(column12))
 				sb.append("," + column12);
 			if (!StringUtils.isEmpty(column13))

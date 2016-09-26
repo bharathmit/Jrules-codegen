@@ -60,12 +60,12 @@ public class MethodBean {
 	private HtmlDataTable dataTable;
 	
 	@Getter @Setter
-	private Boolean renderCheck = null;
+	private Boolean renderCheck = false;
 	
 	@Getter @Setter
 	private String addStatus = "";
 	
-	@Getter @Setter
+	@Getter @Setter  
 	private String editStatus = "";
 	
 	public String saveMethod(){
@@ -151,6 +151,7 @@ public class MethodBean {
 					renderCheck=null;
 				}
 			}
+			
 			codeGenerator.createDynamicColumns(filteredMethodNamesList);
 		return "Method deleted";
 	}

@@ -8,34 +8,61 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Code Generator</title>
+	<link href="./css/styles.css" rel="stylesheet" />
 </h:head>
 <h:body>
 	<h:form id="form">
-		<p:outputPanel id="addarea">
-			<h:panelGrid columns="9" style="margin:10px 0">
-				<p:outputLabel value="Method Name:" style="font-weight:bold" />
-				<p:spacer width="20" />
-				<h:inputText style="width:100%"
-					value="#{methodBean.reqObject.methodName}">
-				</h:inputText>
-			</h:panelGrid>
-			<h:panelGrid columns="2" style="margin:10px 0">
-				<p:outputLabel value="Method Implementation:"
-					style="font-weight:bold" />
-				<p:spacer width="20" />
-				<h:inputTextarea rows="10" cols="50" style="width:100%"
-					value="#{methodBean.reqObject.details}">
-				</h:inputTextarea>
-			</h:panelGrid>
-		</p:outputPanel>
-		<h:commandButton value="Save" action="#{methodBean.saveMethod}"
-			update="growl" />
+			<table style="font-family:Arial">
+					<tr>
+						<td colspan="2" class="header">
+							<h1>
+							<font color="#8c0721">Junit Utility</font> 
+							</h1>
+						</td>
+					</tr>
+					<tr>
+						<td class="leftMenu">
+							<a href="addMethod.xhtml"><img border="0" alt="Add Method" src="./images/Add_Button.png" width="120" height="30"/></a>
+							<a href="editMethod.xhtml"><img border="0" alt="Edit Method" src="./images/Edit_Button.png" width="120" height="30"/></a>
+							<a href="createJunit.xhtml"><img border="0" alt="Create Junit" src="./images/Create.png" width="120" height="30"/></a>
+						</td>
+					<td class="mainContent">
+						<p:outputPanel id="addarea">
+							<h:panelGrid columns="9" style="margin:10px 0">
+								<p:outputLabel value="Method Name:" style="font-weight:bold" />
+								<p:spacer width="20" />
+								<p:inputText style="width:100%"
+									value="#{methodBean.reqObject.methodName}" required="true">
+								</p:inputText>
+							</h:panelGrid>
+							<h:panelGrid columns="2" style="margin:10px 0">
+								<p:outputLabel value="Method Implementation:"
+									style="font-weight:bold" />
+								<p:spacer width="20" />
+								<h:inputTextarea rows="10" cols="50" style="width:100%"
+									value="#{methodBean.reqObject.details}">
+								</h:inputTextarea>
+							</h:panelGrid>
+						</p:outputPanel>
+								&nbsp;
+				
+							<h:commandButton id="Save" alt="Save" class="saveBtn" 
+								action="#{methodBean.saveMethod}" update="growl" />
+							&nbsp;	
+							<h:panelGrid columns="9" style="margin:10px 0">
+							<h:outputText style="font-weight:bold" value="#{methodBean.addStatus}">
+							</h:outputText>
+						</h:panelGrid>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="footer">
+							<b>Website Footer</b>
+						</td>
+					</tr>
+				</table>	
+			</h:form> 
 		
-	</h:form> 
-	<h:panelGrid columns="9" style="margin:10px 0">
-	<h:outputText style="font-weight:bold" value="#{methodBean.addStatus}">
-				</h:outputText>
-	</h:panelGrid>
 				
 </h:body>
 </html>

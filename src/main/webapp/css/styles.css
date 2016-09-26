@@ -1,0 +1,82 @@
+.header{
+	width: 2000px;
+	height: 80px;
+	text-align: center;
+	/*background-color: #BDBDBD;	*/
+	background-color: #FF9999; 
+}
+
+.footer{
+	background-color: #FF9999;
+	text-align: center;	
+}
+
+.leftMenu{
+	height: 500px;
+	width : 150px;
+	background-color:  #FF9999;	
+}
+
+.mainContent{
+	width: 650px;
+	height: 500px;
+	background-color:#F2FBEF ;	
+}
+
+a{
+	display: block;
+	padding: 5px;
+}
+
+.saveBtn {
+    background: url('..\\images\\save.png') no-repeat;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    border: none;
+}
+
+.searchBtn {
+    background: url('..\\images\\search.png') no-repeat;
+    cursor: pointer;
+    width: 105px;
+    height: 40px;
+    border: none;
+}
+
+.addBtn {
+    background: url('..\\images\\add.png') no-repeat;
+    cursor: pointer;
+    width: 90px;
+    height: 40px;
+    border: none;
+}
+.deleteBtn {
+    background: url('..\\images\\delete.png') no-repeat;
+    cursor: pointer;
+    width: 110px;
+    height: 40px;
+    border: none;
+}
+
+.updateBtn {
+    background: url('..\\images\\update.png') no-repeat;
+    cursor: pointer;
+    width: 113px;
+    height: 40px;
+    border: none;
+}
+.downloadBtn {
+    background: url('..\\images\\download.png') no-repeat;
+    cursor: pointer;
+    width: 145px;
+    height: 40px;
+    border: none;
+}
+
+.ui-icon-myCancel{
+    background-image: url(..\\images\\search.png) !important;
+    width: 545px;
+    height: 40px;
+}
+
